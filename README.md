@@ -9,16 +9,18 @@ This is a modern online store application built with awesome features for browsi
 
 <table>
   <tr>
-    <td><img src="https://github.com/Subha62/E-commerce-Store/blob/main/Screenshot%20(54).png?raw=true" width="300"/></td>
-    <td><img src="https://github.com/Subha62/E-commerce-Store/blob/main/Screenshot%20(55).png?raw=true" width="300"/></td>
+    <td><img src="https://github.com/Subha62/E-commerce-Store/raw/master/public/Screenshot%20(54).png" width="300"/></td>
+    <td><img src="https://github.com/Subha62/E-commerce-Store/raw/master/public/Screenshot%20(55).png" width="300"/></td>
   </tr>
   <tr>
-    <td><img src="https://github.com/Subha62/E-commerce-Store/blob/main/Screenshot%20(56).png?raw=true" width="300"/></td>
-    <td><img src="https://github.com/Subha62/E-commerce-Store/blob/main/Screenshot%20(58).png?raw=true" width="300"/></td>
+    <td><img src="https://github.com/Subha62/E-commerce-Store/raw/master/public/Screenshot%20(56).png" width="300"/></td>
+    <td><img src="https://github.com/Subha62/E-commerce-Store/raw/master/public/Screenshot%20(58).png" width="300"/></td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/Subha62/E-commerce-Store/raw/master/Screenshot%20(57).png" width="300"/></td>
   </tr>
 </table>
 
----
 
 ## 🚀 Features
 
