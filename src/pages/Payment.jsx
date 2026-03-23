@@ -36,7 +36,7 @@ const Payment = () => {
       console.log('Order:', order);
 
       const options = {
-        key: 'rzp_test_DkU3XBbbLEmhQW', 
+        key: 'rzp_test_SUW9sqwZMjTQgO', 
         amount: order.amount,
         currency: order.currency,
         name: 'Demo Shop',
