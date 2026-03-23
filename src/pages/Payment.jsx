@@ -46,7 +46,7 @@ const Payment = () => {
       }
 
       const options = {
-        key: 'rzp_test_RYDeNR3fYHOzrU',
+        key: 'rzp_test_SUW9sqwZMjTQgO',
         amount: order.amount,
         currency: order.currency,
         name: 'Demo Shop',
