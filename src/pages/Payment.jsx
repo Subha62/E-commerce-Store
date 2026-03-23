@@ -24,24 +24,22 @@ const Payment = () => {
 
     try {
       // ✅ FIXED: await + response variable
-      const response = await fetch(
-        'https://shopping-cart-backend-4.onrender.com/create-order',
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            amount: 50000,
-            currency: 'INR',
-          }),
-        }
-      );
+     const response = await fetch('https://shopping-cart-backend-4.onrender.com/create-order', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ amount: 50000, currency: 'INR' }),
+});
 
-      const order = await response.json();
-      console.log('Order:', order);
+if (!response.ok) {
+  throw new Error("Backend error");
+}
 
-      if (!order.id) {
-        throw new Error('Order creation failed');
-      }
+const order = await response.json();
+console.log(order);
+
+if (!order.id) {
+  throw new Error("Order creation failed");
+}}
 
       // ✅ Razorpay options
       const options = {
