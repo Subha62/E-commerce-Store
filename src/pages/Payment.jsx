@@ -23,20 +23,29 @@ const Payment = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/create-order', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          amount: 50000, // 500 INR in paisa
-          currency: 'INR',
-        }),
-      });
+      // ✅ FIXED: await + response variable
+      const response = await fetch(
+        'https://shopping-cart-backend-4.onrender.com/create-order',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            amount: 50000,
+            currency: 'INR',
+          }),
+        }
+      );
 
       const order = await response.json();
       console.log('Order:', order);
 
+      if (!order.id) {
+        throw new Error('Order creation failed');
+      }
+
+      // ✅ Razorpay options
       const options = {
-        key: 'rzp_test_SUW9sqwZMjTQgO', 
+        key: 'rzp_test_RYDeNR3fYHOzrU', // ✅ SAME AS BACKEND
         amount: order.amount,
         currency: order.currency,
         name: 'Demo Shop',
@@ -52,10 +61,21 @@ const Payment = () => {
           email: 'test@example.com',
           contact: '9999999999',
         },
+        theme: {
+          color: '#3399cc',
+        },
       };
 
       const rzp = new window.Razorpay(options);
+
+      // ✅ Optional: failure handler
+      rzp.on('payment.failed', function (response) {
+        console.error('Payment Failed:', response);
+        alert('Payment failed!');
+      });
+
       rzp.open();
+
     } catch (err) {
       console.error(err);
       alert('Payment failed!');
@@ -79,10 +99,17 @@ const Payment = () => {
       )}
 
       <div className="flex gap-4">
-        <button onClick={handleGoBack} className="bg-gray-600 text-white p-2 rounded">
+        <button
+          onClick={handleGoBack}
+          className="bg-gray-600 text-white p-2 rounded"
+        >
           Back to Shipping
         </button>
-        <button onClick={handleProceedToPayment} className="bg-green-700 text-white p-2 rounded">
+
+        <button
+          onClick={handleProceedToPayment}
+          className="bg-green-700 text-white p-2 rounded"
+        >
           Proceed with Payment
         </button>
       </div>
