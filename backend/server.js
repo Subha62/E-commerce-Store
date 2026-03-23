@@ -31,31 +31,33 @@ const razorpay = new Razorpay({
 
 //  Health check route
 app.get('/', (req, res) => {
-  res.send('✅ Razorpay backend is running.');
+  res.send(' Razorpay backend is running.');
 });
 
 //  Create Order route
 app.post('/create-order', async (req, res) => {
-  const { amount, currency } = req.body;
+  console.log("BODY:", req.body);
 
-  if (!amount || !currency) {
-    return res.status(400).json({ error: 'Amount and currency required' });
+  const { amount } = req.body;
+
+  if (!amount) {
+    return res.status(400).json({ error: 'Amount required' });
   }
 
   try {
     const order = await razorpay.orders.create({
-      amount: amount, // amount in paisa
-      currency,
-      receipt: `receipt_${Math.random().toString(36).substring(7)}`,
+      amount: amount, //  already paisa
+      currency: "INR",
+      receipt: `receipt_${Date.now()}`, //  FIXED
     });
 
-    console.log(' Order created:', order);
+    console.log("Order:", order);
     res.json(order);
+
   } catch (error) {
-    console.error(' Order creation failed:', error);
+    console.error("❌ ERROR:", error);
     res.status(500).json({
-      error: 'Failed to create order',
-      details: error?.error?.description || error.message,
+      error: error.message,
     });
   }
 });
