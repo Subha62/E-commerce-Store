@@ -10,7 +10,7 @@ const app = express();
 
 const allowedOrigins = [
   'http://localhost:3000', 
-  '' 
+  'https://e-commerce-store-mu-flame.vercel.app/' 
 ];
 
 app.use(
@@ -31,10 +31,36 @@ const razorpay = new Razorpay({
 
 //  Health check route
 app.get('/', (req, res) => {
-  res.send(' Razorpay backend is running.');
+  res.send('✅ Razorpay backend is running.');
 });
 
 //  Create Order route
+// app.post('/create-order', async (req, res) => {
+//   const { amount, currency } = req.body;
+
+//   if (!amount || !currency) {
+//     return res.status(400).json({ error: 'Amount and currency required' });
+//   }
+
+//   try {
+//     const order = await razorpay.orders.create({
+//       amount: amount, // amount in paisa
+//       currency,
+//       receipt: `receipt_${Math.random().toString(36).substring(7)}`,
+//     });
+
+//     console.log(' Order created:', order);
+//     res.json(order);
+//   } catch (error) {
+//     console.error(' Order creation failed:', error);
+//     res.status(500).json({
+//       error: 'Failed to create order',
+//       details: error?.error?.description || error.message,
+//     });
+//   }
+// });
+
+
 app.post('/create-order', async (req, res) => {
   console.log("BODY:", req.body);
 
@@ -46,12 +72,12 @@ app.post('/create-order', async (req, res) => {
 
   try {
     const order = await razorpay.orders.create({
-      amount: amount, //  already paisa
+      amount: amount, // ✅ already paisa
       currency: "INR",
-      receipt: `receipt_${Date.now()}`, //  FIXED
+      receipt: `receipt_${Date.now()}`, // ✅ FIXED
     });
 
-    console.log("Order:", order);
+    console.log("✅ Order:", order);
     res.json(order);
 
   } catch (error) {
@@ -67,5 +93,3 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () =>
   console.log(`✅ Razorpay backend running at http://localhost:${PORT}`)
 );
-
-
