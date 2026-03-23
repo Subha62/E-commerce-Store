@@ -40,7 +40,6 @@ const Payment = () => {
       }
 
       const order = await response.json();
-      console.log('Order:', order);
 
       if (!order.id) {
         throw new Error('Order creation failed');
@@ -55,7 +54,6 @@ const Payment = () => {
         order_id: order.id,
         handler: (response) => {
           alert('Payment successful!');
-          console.log(response);
           navigate('/payment-success');
         },
         prefill: {
@@ -63,23 +61,14 @@ const Payment = () => {
           email: 'test@example.com',
           contact: '9999999999',
         },
-        theme: {
-          color: '#3399cc',
-        },
       };
 
       const rzp = new window.Razorpay(options);
-
-      rzp.on('payment.failed', function (response) {
-        console.error('Payment Failed:', response);
-        alert('Payment failed!');
-      });
-
       rzp.open();
 
-    } catch (err) {
-      console.error(err);
-      alert(err.message || 'Payment failed!');
+    } catch (error) {
+      console.error(error);
+      alert('Payment failed');
     }
   };
 
